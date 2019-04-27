@@ -4,15 +4,19 @@ const nunjucks = require('nunjucks');
 const app = express();
 
 nunjucks.configure('views', {
-    autoescape: true,
-    express: app,
-    watch: true,
+  autoescape: true,
+  express: app,
+  watch: true
 });
 
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'njk');
 
-const users = ['Roger Mokarzel', 'Mariana Chiconini Mokarzel', 'Vinicius Altomani'];
+const users = [
+  'Roger Mokarzel',
+  'Mariana Chiconini Mokarzel',
+  'Vinicius Altomani'
+];
 
 // const logMidlleware = (req, res, next) => {
 //     console.log(
@@ -25,18 +29,17 @@ const users = ['Roger Mokarzel', 'Mariana Chiconini Mokarzel', 'Vinicius Altoman
 // };
 
 app.get('/', (req, res) => {
-    return res.render('list', { users });
+  return res.render('list', { users });
 });
 
 app.get('/new', (req, res) => {
-    return res.render("new");
+  return res.render('new');
 });
 
 app.post('/create', (req, res) => {
-    users.push(req.body.user);
-    return res.redirect('/');
+  users.push(req.body.user);
+  return res.redirect('/');
 });
-
 
 // app.get('/nome/:name', (req, res) => {
 //     return res.json({
